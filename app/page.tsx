@@ -1,113 +1,132 @@
-import Image from 'next/image'
+"use client"
 
-export default function Home() {
+import { useEffect, useState } from "react";
+
+type FlifoObject = {
+  flifo: Flifo;
+};
+
+type Flifo = {
+  flightMapPath: string;
+  flightDurationMinutes: number;
+  timeRemainingToDestination: number;
+};
+
+function MyApp() {
+  const [thing, setThing] = useState<FlifoObject|null>();
+  const [error, setError] = useState<Error|null>(null);
+
+  useEffect(() => {
+    async function getThing() {
+      try {
+        // const data = await fetch("/api/getSession").then((x) => x.json());
+        const res = await fetch("/api/getSession");
+        console.log(res);
+        if (Number(res.status) > 200) {
+          // throw?
+          setError(await res.json());
+        } else {
+          const data = await res.json();
+          setThing(data);
+        }
+      } catch (e) {
+        console.log(e);
+        if (e instanceof Error) {
+          setError(e);
+        }
+      }
+    }
+
+    setInterval(getThing, 5000);
+  }, []);
+
+  function getFlightProgressStage(flifo: any) {
+    let flightProgressStage = 1;
+
+    if (flifo.timeRemainingToDestination && flifo.timeRemainingToDestination) {
+      if (flifo.flightDurationMinutes) {
+        const actualFlightTime =
+          flifo.flightDurationMinutes - flifo.timeRemainingToDestination;
+        let flightCompletionPercentage =
+          actualFlightTime / flifo.flightDurationMinutes;
+
+        if (flightCompletionPercentage < 0) {
+          flightCompletionPercentage = 0;
+        }
+
+        // console.log('rem:' + flifo.timeRemainingToDestination + 'flightdur: ' + flifo.flightDurationMinutes);
+
+        flightProgressStage = Math.ceil(flightCompletionPercentage * 100);
+      }
+    }
+
+    return flightProgressStage;
+  }
+
+  if (error) {
+    return <h1>{error.message}</h1>;
+  }
+
+  if (!thing) {
+    return <>Loading...</>;
+  }
+
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          Get started by editing&nbsp;
-          <code className="font-mono font-bold">app/page.tsx</code>
-        </p>
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:h-auto lg:w-auto lg:bg-none">
-          <a
-            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className="dark:invert"
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
-      </div>
-
-      <div className="relative flex place-items-center before:absolute before:h-[300px] before:w-[480px] before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-[240px] after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff] after:dark:opacity-40 before:lg:h-[360px] z-[-1]">
-        <Image
-          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className="mb-32 grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-4 lg:text-left">
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Docs{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Learn{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Learn about Next.js in an interactive course with&nbsp;quizzes!
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Templates{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Explore the Next.js 13 playground.
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Deploy{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
-  )
+    <>
+      {thing.flifo ? (
+        <>
+          <h1>{getFlightProgressStage(thing.flifo)}%</h1>
+          <div>
+            <div
+              style={{ width: "100%", backgroundColor: "#ddd", height: "20px" }}
+            >
+              <div
+                style={{
+                  width: `${getFlightProgressStage(thing.flifo)}%`,
+                  backgroundColor: "#bbb",
+                  height: "20px",
+                  position: "relative",
+                }}
+              >
+                <div style={{ position: "absolute", right: "0" }}>✈️</div>
+              </div>
+            </div>
+          </div>
+        </>
+      ) : (
+        <h1>No Flifo :(</h1>
+      )}
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img alt="Flight path" src={`https://www.unitedwifi.com/${thing.flifo.flightMapPath}`} />
+      <pre>{JSON.stringify(thing, null, 2)}</pre>
+    </>
+  );
 }
+
+export default MyApp;
+
+// FlifoWidgetControllerImpl.prototype.getFlightProgressStage = function () {
+//   var flifo = this.getFlifo();
+//   var flightProgressStage = 1;
+//   if (angular.isDefined(flifo) && angular.isObject(flifo)) {
+//       if (angular.isDefined(flifo.timeRemainingToDestination) && angular.isNumber(flifo.timeRemainingToDestination)) {
+//           if (angular.isDefined(flifo.flightDurationMinutes) && angular.isNumber(flifo.flightDurationMinutes)) {
+//               var actualFlightTime = flifo.flightDurationMinutes - flifo.timeRemainingToDestination;
+//               var flightCompletionPercentage = actualFlightTime / flifo.flightDurationMinutes;
+//               if (flightCompletionPercentage < 0) {
+//                   flightCompletionPercentage = 0;
+//               }
+//               //console.log('rem:' + flifo.timeRemainingToDestination + 'flightdur: ' + flifo.flightDurationMinutes);
+//               flightProgressStage = Math.ceil(flightCompletionPercentage / this.progressStageStep);
+//           }
+//       }
+//   }
+//   return flightProgressStage;
+// };
+
+
+// export default function Home() {
+//   return (
+//     <>This Is Probably Where The Magic Happens</>
+//   )
+// }

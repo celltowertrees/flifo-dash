@@ -1,0 +1,142 @@
+{
+  "isPortalInitialized": true,
+  "flightOffersInternetService": true,
+  "internetConnectionIsAvailable": true,
+  "isPDEServiceAvailable": true,
+  "devicePlatform": "Other",
+  "host": "www.unitedwifi.com",
+  "IsLoggedIn": false,
+  "isSubscriptionAvailable": true,
+  "VendorCode": "PAC",
+  "VendorName": "Panasonic",
+  "CoverageMessage": "",
+  "ShowCoverageArea": false,
+  "PurchaseActive": false,
+  "internet": {
+    "accessType": "NONE",
+    "tier": "",
+    "tierDescription": "",
+    "fulfilmentState": "NONE",
+    "orderState": "ACTIVE",
+    "timeRemaining": 0
+  },
+  "flifo": {
+    "actualArrivalTimeLocal": "01 Jan 0001 12:00 AM",
+    "actualDepartureTime": "2:06 p.m.",
+    "actualDepartureTimeLocal": "11 Oct 2023 2:06 PM",
+    "airSpeedKPH": "74",
+    "airSpeedMPH": "46",
+    "airTemperatureC": "-60",
+    "airTemperatureF": "-76",
+    "aircraftModel": "Boeing 787-9",
+    "altitudeFt": "40000",
+    "altitudeMeters": "12192",
+    "arrivalConcourse": " Concourse G",
+    "arrivalGate": "G4",
+    "arrivalTerminal": "International Terminal",
+    "departureConcourse": "",
+    "departureGate": "B46",
+    "departureTerminal": "Terminal 2",
+    "destinationAirportCode": "SFO",
+    "destinationCity": "San Francisco, CA, US (SFO)",
+    "destinationState": "",
+    "equipmentCode": "78P",
+    "estimatedArrivalTime": "5:08 p.m.",
+    "estimatedArrivalTimeLocal": "11 Oct 2023 5:08 PM",
+    "estimatedDepartureTimeLocal": "11 Oct 2023 2:10 PM",
+    "flightDurationMinutes": 0,
+    "flightGuid": "7d1486e3-a5a6-d33b-7a24-9b9644e50905",
+    "flightMapPath": "/portal/images/map/TabletLandscape.png?1697056534",
+    "flightNumber": "939",
+    "flightStatus": "In Flight - Estimated to Arrive 3 Minutes Late",
+    "groundSpeedKPH": "963",
+    "groundSpeedMPH": "598",
+    "isFake": false,
+    "noseNumber": "3979",
+    "originAirportCode": "LHR",
+    "originCity": "London, GB (LHR)",
+    "originState": "",
+    "scheduledArrivalTime": "5:05 p.m.",
+    "scheduledArrivalTimeLocal": "11 Oct 2023 5:05 PM",
+    "scheduledDepartureTime": "2:10 p.m.",
+    "scheduledDepartureTimeLocal": "11 Oct 2023 2:10 PM",
+    "tailNumber": "N24979",
+    "timeRemainingToDestination": 210,
+    "windDirection": "ENE"
+  },
+  "weather": {
+    "currently": {
+      "code": "34",
+      "currtempc": 21,
+      "currtempf": 69,
+      "day": "Wed",
+      "hightempc": 21,
+      "hightempf": 69,
+      "lowtempc": 21,
+      "lowtempf": 69,
+      "text": "Fair"
+    },
+    "forecast": [
+      {
+        "code": 34,
+        "day": "Thu",
+        "hightempc": 24,
+        "hightempf": 74,
+        "lowtempc": 13,
+        "lowtempf": 55,
+        "text": "Mostly Sunny"
+      },
+      {
+        "code": 30,
+        "day": "Fri",
+        "hightempc": 22,
+        "hightempf": 71,
+        "lowtempc": 14,
+        "lowtempf": 57,
+        "text": "Partly Cloudy"
+      },
+      {
+        "code": 28,
+        "day": "Sat",
+        "hightempc": 23,
+        "hightempf": 74,
+        "lowtempc": 16,
+        "lowtempf": 60,
+        "text": "Mostly Cloudy"
+      },
+      {
+        "code": 30,
+        "day": "Sun",
+        "hightempc": 24,
+        "hightempf": 76,
+        "lowtempc": 15,
+        "lowtempf": 59,
+        "text": "Partly Cloudy"
+      },
+      {
+        "code": 26,
+        "day": "Mon",
+        "hightempc": 23,
+        "hightempf": 74,
+        "lowtempc": 17,
+        "lowtempf": 62,
+        "text": "Cloudy"
+      },
+      "lastitem"
+    ]
+  },
+  "deviceCAS": 3,
+  "version": "3.7.0",
+  "metaData": {
+    "properties": {
+      "Content-Type": "Protobuf",
+      "FramedIp": "10.109.68.120",
+      "IpAddress": "172.19.248.120",
+      "Mac": "a0:78:17:81:62:d0",
+      "UserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36",
+      "vendor": "PAC",
+      "vendorName": "Panasonic",
+      "version": "missing"
+    }
+  }
+}
