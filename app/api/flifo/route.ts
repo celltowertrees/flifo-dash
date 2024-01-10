@@ -1,5 +1,7 @@
-export default async function getThing(_req, res) {
-  res.status(200).json({
+export const dynamic = "force-dynamic";
+
+export async function GET() {
+  return Response.json({
     message: "this should return 200 no matter what",
   });
   // try {

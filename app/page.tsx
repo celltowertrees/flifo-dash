@@ -20,7 +20,7 @@ function MyApp() {
     async function getThing() {
       try {
         // const data = await fetch("/api/getSession").then((x) => x.json());
-        const res = await fetch("/api/getSession");
+        const res = await fetch("/api/flifo");
         console.log(res);
         if (Number(res.status) > 200) {
           // throw?
@@ -37,7 +37,8 @@ function MyApp() {
       }
     }
 
-    setInterval(getThing, 5000);
+    // setInterval(getThing, 5000);
+    getThing();
   }, []);
 
   function getFlightProgressStage(flifo: any) {
