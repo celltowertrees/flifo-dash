@@ -40,11 +40,12 @@ function MyApp() {
     getThing();
   }, []);
 
-  function getFlightProgressStage(flifo: any) {
+  function getFlightProgressStage(flifo: Flifo) {
+    console.log(flifo);
     let flightProgressStage = 1;
 
-    if (flifo.timeRemainingToDestination && flifo.timeRemainingToDestination) {
-      if (flifo.flightDurationMinutes) {
+    if (flifo.timeRemainingToDestination) {
+      if (flifo.flightDurationMinutes !== undefined) {
         const actualFlightTime =
           flifo.flightDurationMinutes - flifo.timeRemainingToDestination;
         let flightCompletionPercentage =
@@ -54,9 +55,11 @@ function MyApp() {
           flightCompletionPercentage = 0;
         }
 
-        // console.log('rem:' + flifo.timeRemainingToDestination + 'flightdur: ' + flifo.flightDurationMinutes);
+        console.log('rem:' + flifo.timeRemainingToDestination + 'flightdur: ' + flifo.flightDurationMinutes);
 
         flightProgressStage = Math.ceil(flightCompletionPercentage * 100);
+      } else {
+        console.log("Flight duration minutes is undefined");
       }
     }
 
@@ -92,7 +95,7 @@ function MyApp() {
               </div>
             </div>
           </div>
-          /* eslint-disable-next-line @next/next/no-img-element */}
+          {/* eslint-disable-next-line @next/next/no-img-element */}
           <img alt="Flight path" src={`https://www.unitedwifi.com/${thing.flifo.flightMapPath}`} />
           <pre>{JSON.stringify(thing, null, 2)}</pre>
         </>

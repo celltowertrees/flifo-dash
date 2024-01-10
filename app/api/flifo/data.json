@@ -44,7 +44,7 @@
     "estimatedArrivalTime": "5:08 p.m.",
     "estimatedArrivalTimeLocal": "11 Oct 2023 5:08 PM",
     "estimatedDepartureTimeLocal": "11 Oct 2023 2:10 PM",
-    "flightDurationMinutes": 0,
+    "flightDurationMinutes": 1000,
     "flightGuid": "7d1486e3-a5a6-d33b-7a24-9b9644e50905",
     "flightMapPath": "/portal/images/map/TabletLandscape.png?1697056534",
     "flightNumber": "939",

@@ -1,4 +1,5 @@
 export const dynamic = "force-dynamic";
+import data from "./data.json";
 
 export async function GET() {
   try {
@@ -8,8 +9,8 @@ export async function GET() {
     const thing = await thingResponse.json();
     return Response.json(thing);
   } catch (e) {
-    return Response.json({
-      message: "You must not be connected to the internet or something",
-    });
+    console.error(e);
+    console.log("Providing fallback response");
+    return Response.json(data);
   }
 }
