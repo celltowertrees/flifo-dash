@@ -21,7 +21,6 @@ function MyApp() {
       try {
         // const data = await fetch("/api/getSession").then((x) => x.json());
         const res = await fetch("/api/flifo");
-        console.log(res);
         if (Number(res.status) > 200) {
           // throw?
           setError(await res.json());
@@ -93,13 +92,13 @@ function MyApp() {
               </div>
             </div>
           </div>
+          /* eslint-disable-next-line @next/next/no-img-element */}
+          <img alt="Flight path" src={`https://www.unitedwifi.com/${thing.flifo.flightMapPath}`} />
+          <pre>{JSON.stringify(thing, null, 2)}</pre>
         </>
       ) : (
         <h1>No Flifo :(</h1>
       )}
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img alt="Flight path" src={`https://www.unitedwifi.com/${thing.flifo.flightMapPath}`} />
-      <pre>{JSON.stringify(thing, null, 2)}</pre>
     </>
   );
 }
