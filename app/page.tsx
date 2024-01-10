@@ -95,6 +95,7 @@ function MyApp() {
               </div>
             </div>
           </div>
+          {/* TODO: don't show this for fallback data */}
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img alt="Flight path" src={`https://www.unitedwifi.com/${thing.flifo.flightMapPath}`} />
           <pre>{JSON.stringify(thing, null, 2)}</pre>
