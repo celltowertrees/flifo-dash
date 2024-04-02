@@ -1,3 +1,5 @@
+This is an attempt at creating a flight dashboard using information from an API on United Airlines' wifi, inspired by a post that was on Hacker News that I haven't been able to find again.
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
